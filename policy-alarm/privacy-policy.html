@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개인정보처리방침 · 정책 알리미</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Noto+Serif+KR:wght@400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #030712;
+    --surface:   #111827;
+    --border:    rgba(255,255,255,0.08);
+    --blue:      #1D4ED8;
+    --blue-lt:   #60A5FA;
+    --sky:       #38BDF8;
+    --sky-dim:   rgba(56,189,248,0.12);
+    --text:      #F3F4F6;
+    --muted:     rgba(243,244,246,0.52);
+    --radius:    16px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── mesh background ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 10% 0%,  rgba(29,78,216,0.30) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 100%, rgba(30,58,138,0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 60% at 50% 50%,  rgba(3,7,18,0.85) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* ── dot grid ── */
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── header ── */
+  header {
+    padding: 56px 0 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .icon-badge {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #1D4ED8, #1E3A8A);
+    display: grid; place-items: center;
+    box-shadow: 0 8px 24px rgba(29,78,216,0.45);
+    flex-shrink: 0;
+  }
+
+  .icon-badge svg { width: 28px; height: 28px; }
+
+  .brand-text h1 {
+    font-family: 'DM Serif Display', 'Noto Serif KR', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .brand-text span {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .lang-toggle {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .lang-btn {
+    border: none;
+    background: none;
+    color: var(--muted);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+    letter-spacing: 0.03em;
+  }
+  .lang-btn.active {
+    background: var(--blue);
+    color: #fff;
+  }
+
+  .page-title {
+    font-family: 'DM Serif Display', 'Noto Serif KR', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: #fff;
+  }
+  .page-title .accent { color: var(--sky); }
+
+  .effective-date {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── divider ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--blue-lt) 0%, transparent 100%);
+    margin-bottom: 48px;
+    opacity: 0.35;
+  }
+
+  /* ── sections ── */
+  .section {
+    margin-bottom: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sec-num {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: var(--sky-dim);
+    border: 1px solid rgba(56,189,248,0.22);
+    color: var(--sky);
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .section-header h2 {
+    font-family: 'DM Serif Display', 'Noto Serif KR', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .section-body {
+    padding: 22px 24px;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .section-body p + p { margin-top: 14px; }
+
+  .section-body ul {
+    list-style: none;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .section-body li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .section-body li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue-lt);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .pill {
+    display: inline-block;
+    background: rgba(29,78,216,0.22);
+    border: 1px solid rgba(96,165,250,0.3);
+    border-radius: 6px;
+    padding: 2px 9px;
+    font-size: 0.78rem;
+    color: var(--blue-lt);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .highlight-box {
+    margin-top: 14px;
+    padding: 14px 18px;
+    background: rgba(56,189,248,0.07);
+    border: 1px solid rgba(56,189,248,0.18);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: rgba(186,230,255,0.9);
+    line-height: 1.65;
+  }
+
+  a {
+    color: var(--blue-lt);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(96,165,250,0.4);
+    transition: color 0.15s;
+  }
+  a:hover { color: var(--sky); text-decoration-color: var(--sky); }
+
+  /* ── contact card ── */
+  .contact-card {
+    margin-top: 40px;
+    padding: 28px 24px;
+    background: linear-gradient(135deg, rgba(29,78,216,0.16), rgba(30,58,138,0.12));
+    border: 1px solid rgba(29,78,216,0.35);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .contact-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(29,78,216,0.28);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+  }
+
+  .contact-card h3 {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .contact-card p {
+    font-size: 0.92rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* ── lang content ── */
+  [data-lang] { display: none; }
+  [data-lang].show { display: block; }
+  [data-lang-inline] { display: none; }
+  [data-lang-inline].show { display: inline; }
+
+  /* ── responsive ── */
+  @media (max-width: 500px) {
+    .section-body { padding: 18px; }
+    .contact-card { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;width:100%;flex-wrap:wrap;gap:16px;">
+      <div class="brand">
+        <div class="icon-badge">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Bell shape -->
+            <path d="M14 3.5C14 3.5 9.5 6.5 9.5 13v3.5H7.5l1 2h11l1-2h-2V13c0-6.5-4.5-9.5-4.5-9.5z" fill="white" opacity="0.92"/>
+            <!-- Clapper -->
+            <ellipse cx="14" cy="20" rx="2" ry="1.1" fill="#93C5FD"/>
+            <!-- Glow dot (new alert) -->
+            <circle cx="19.5" cy="6.5" r="3" fill="#38BDF8"/>
+            <path d="M18.3 6.5 L19.3 7.5 L21 5.5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>정책 알리미 <span data-lang-inline="ko" class="show">/ Policy Alarm</span></h1>
+          <span>TT Studio Korea</span>
+        </div>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
+        <button class="lang-btn" onclick="setLang('en')">English</button>
+      </div>
+    </div>
+
+    <div data-lang="ko" class="show">
+      <h2 class="page-title">개인정보<br><span class="accent">처리방침</span></h2>
+    </div>
+    <div data-lang="en">
+      <h2 class="page-title">Privacy<br><span class="accent">Policy</span></h2>
+    </div>
+
+    <p class="effective-date">
+      <span data-lang="ko" class="show">시행일: 2026년 6월 3일</span>
+      <span data-lang="en">Effective: June 3, 2026</span>
+    </p>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">01</div>
+      <h2>
+        <span data-lang="ko" class="show">수집하는 정보</span>
+        <span data-lang="en">Information We Collect</span>
+      </h2>
+    </div>
+    <div class="section-body">
+      <div data-lang="ko" class="show">
+        <p>정책 알리미는 서비스 제공에 필요한 <strong>최소한의 정보만 수집</strong>합니다. 이름·이메일·전화번호 등 개인 식별 정보는 수집하지 않습니다.</p>
+        <ul>
+          <li><strong>FCM 토큰</strong>: 푸시 알림 발송을 위해 Firebase로부터 발급되는 기기 식별 토큰. Firebase Firestore에 저장됩니다.</li>
+          <li><strong>읽은 정책 목록</strong>: 사용자가 조회한 정책 ID 목록. <span class="pill">기기 내부에만</span> 저장되며 서버로 전송되지 않습니다.</li>
+          <li><strong>광고 관련 데이터</strong>: Google AdMob이 광고 제공을 위해 기기 식별자 및 광고 행동 데이터를 수집할 수 있습니다.</li>
+        </ul>
+        <div class="highlight-box">
+          🔔 정책 데이터(보도자료)는 정책브리핑 OpenAPI(공공데이터포털)에서 공개적으로 수집하며, 사용자의 개인정보와 무관합니다.
+        </div>
+      </div>
+      <div data-lang="en">
+        <p>Policy Alarm collects <strong>only the minimum information</strong> necessary to provide its service. No personally identifiable information such as name, email, or phone number is collected.</p>
+        <ul>
+          <li><strong>FCM Token</strong>: A device token issued by Firebase for push notifications, stored in Firebase Firestore.</li>
+          <li><strong>Read Policy IDs</strong>: The list of policy IDs the user has viewed, stored <span class="pill">on-device only</span> and never transmitted to any server.</li>
+          <li><strong>Ad-related Data</strong>: Google AdMob may collect device identifiers and behavioral data to serve advertisements.</li>
+        </ul>
+        <div class="highlight-box">
+          🔔 Policy data (press releases) is collected publicly from the Policy Briefing OpenAPI (data.go.kr) and is unrelated to any user's personal information.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">02</div>
+      <h2>
+        <span data-lang="ko" class="show">제3자 서비스</span>
+        <span data-lang="en">Third-Party Services</span>
+      </h2>
+    </div>
+    <div class="section-body">
+      <div data-lang="ko" class="show">
+        <p>앱은 아래의 제3자 서비스를 사용하며, 각 서비스는 독자적인 개인정보처리방침에 따라 데이터를 처리합니다.</p>
+        <ul>
+          <li><strong>Google AdMob</strong> — 배너 광고 표시. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보처리방침</a></li>
+          <li><strong>Firebase Cloud Messaging (FCM)</strong> — 새 정책 푸시 알림. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase 개인정보처리방침</a></li>
+          <li><strong>Firebase Firestore</strong> — FCM 토큰 저장 및 알림 발송 관리. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase 개인정보처리방침</a></li>
+          <li><strong>Google Play 서비스</strong> — 기기 인증 및 광고 ID 제공. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보처리방침</a></li>
+        </ul>
+        <p>광고 개인화를 원하지 않는 경우 기기의 Google 설정 → 광고에서 <strong>광고 개인 최적화 사용 안함</strong>을 선택하실 수 있습니다.</p>
+      </div>
+      <div data-lang="en">
+        <p>The app uses the following third-party services, each of which processes data under its own privacy policy.</p>
+        <ul>
+          <li><strong>Google AdMob</strong> — Banner ad delivery. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+          <li><strong>Firebase Cloud Messaging (FCM)</strong> — Push notifications for new policies. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy</a></li>
+          <li><strong>Firebase Firestore</strong> — FCM token storage and notification management. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy</a></li>
+          <li><strong>Google Play Services</strong> — Device authentication and advertising ID. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+        </ul>
+        <p>To opt out of personalized ads, go to your device's Google Settings → Ads and enable <strong>Opt out of Ads Personalization</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">03</div>
+      <h2>
+        <span data-lang="ko" class="show">데이터 저장 및 보안</span>
+        <span data-lang="en">Data Storage &amp; Security</span>
+      </h2>
+    </div>
+    <div class="section-body">
+      <div data-lang="ko" class="show">
+        <p>수집된 데이터는 다음과 같이 저장됩니다.</p>
+        <ul>
+          <li><strong>FCM 토큰</strong>: Google Firebase Firestore(미국 소재)에 저장. 앱 삭제 후에도 서버에 잔존할 수 있으며, 삭제를 원하시면 아래 이메일로 문의해 주세요.</li>
+          <li><strong>읽은 정책 목록</strong>: Android <span class="pill">Room 데이터베이스</span>에 기기 내부에만 저장. 앱 삭제 시 완전히 삭제됩니다.</li>
+        </ul>
+        <p>당사는 수집된 데이터를 제3자에게 판매하거나 마케팅 목적으로 사용하지 않습니다.</p>
+      </div>
+      <div data-lang="en">
+        <p>Collected data is stored as follows.</p>
+        <ul>
+          <li><strong>FCM Token</strong>: Stored in Google Firebase Firestore (US-based). It may remain on the server after the app is uninstalled. To request deletion, please contact us at the email below.</li>
+          <li><strong>Read Policy IDs</strong>: Stored locally on the device in an Android <span class="pill">Room database</span>. Permanently deleted when the app is uninstalled.</li>
+        </ul>
+        <p>We do not sell collected data to third parties or use it for marketing purposes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">04</div>
+      <h2>
+        <span data-lang="ko" class="show">아동 개인정보 보호</span>
+        <span data-lang="en">Children's Privacy</span>
+      </h2>
+    </div>
+    <div class="section-body">
+      <div data-lang="ko" class="show">
+        <p>정책 알리미는 13세 미만 아동을 대상으로 하지 않으며, 아동으로부터 의도적으로 개인정보를 수집하지 않습니다. 만약 13세 미만 아동의 개인정보가 수집된 사실을 발견하면 즉시 삭제 조치합니다.</p>
+      </div>
+      <div data-lang="en">
+        <p>Policy Alarm is not directed at children under 13 and does not knowingly collect personal information from children. If we become aware that personal information of a child under 13 has been collected, we will take immediate steps to delete it.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">05</div>
+      <h2>
+        <span data-lang="ko" class="show">방침 변경</span>
+        <span data-lang="en">Changes to This Policy</span>
+      </h2>
+    </div>
+    <div class="section-body">
+      <div data-lang="ko" class="show">
+        <p>본 개인정보처리방침은 법령 변경 또는 서비스 개선에 따라 업데이트될 수 있습니다. 변경 시 이 페이지의 시행일을 수정하며, 중요한 변경사항은 앱 업데이트 노트를 통해 안내합니다.</p>
+      </div>
+      <div data-lang="en">
+        <p>This Privacy Policy may be updated in response to changes in law or service improvements. The effective date on this page will be revised accordingly. Significant changes will be communicated via app update release notes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-card">
+    <div class="contact-icon">✉️</div>
+    <div>
+      <h3>
+        <span data-lang="ko" class="show">개인정보 관련 문의</span>
+        <span data-lang="en">Privacy Inquiries</span>
+      </h3>
+      <p><a href="mailto:jysm8689@gmail.com">jysm8689@gmail.com</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026 TT Studio Korea</span>
+    <span>
+      <span data-lang="ko" class="show">정책 알리미 · 개인정보처리방침</span>
+      <span data-lang="en">Policy Alarm · Privacy Policy</span>
+    </span>
+  </footer>
+</div>
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('show', el.dataset.lang === lang);
+    });
+    document.querySelectorAll('[data-lang-inline]').forEach(el => {
+      el.classList.toggle('show', el.dataset.langInline === lang);
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === (lang === 'ko' ? '한국어' : 'English'));
+    });
+  }
+</script>
+</body>
+</html>
